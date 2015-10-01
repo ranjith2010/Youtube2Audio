@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>AFNetworking.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>Pods-YoutubeToAudio.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>SDWebImage.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>UIActivityIndicator-for-SDWebImage.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+		<key>Unirest.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>0E8FE4D551C56C034ECEF11349232877</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>62A9CF5CB865FF40680D27B2B27AA9CD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D846E56CF617FA8EA0C583A8E77CC5E3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EC511E28905FE2C20E23DA0E564D2673</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EFAB901AAEE3A5D69521ED60A3C24D3E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
