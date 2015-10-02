@@ -20,8 +20,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *mediaIndexLabel;
 
-
-
 - (void)feedCellWithObject:(DataModel*)dataModel;
 
 @end

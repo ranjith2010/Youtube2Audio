@@ -125,6 +125,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0799B5F61BBDE98000C3D071 /* Srikanth - AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				C66B21A41BA910E80038DA8D /* ZPHttpClientAF.h */,
+				C66B21A51BA910E80038DA8D /* ZPHttpClientAF.m */,
+				C66B21A21BA910E80038DA8D /* ZPHttpAPIClient.h */,
+				C66B21A31BA910E80038DA8D /* ZPHttpAPIClient.m */,
+			);
+			name = "Srikanth - AFNetworking";
+			sourceTree = "<group>";
+		};
+		0799B60A1BBE871100C3D071 /* Image Downloader */ = {
+			isa = PBXGroup;
+			children = (
+				C6042FD11BB8900A0007608C /* RKImageDownloader.h */,
+				C6042FD21BB8900A0007608C /* RKImageDownloader.m */,
+				C6042FD41BB8925D0007608C /* RKImageFiltration.h */,
+				C6042FD51BB8925D0007608C /* RKImageFiltration.m */,
+				C6042FCE1BB88F4B0007608C /* RKPendingOperations.h */,
+				C6042FCF1BB88F4B0007608C /* RKPendingOperations.m */,
+			);
+			name = "Image Downloader";
+			sourceTree = "<group>";
+		};
 		6E4E7039DAAB379ABE053A36 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,18 +173,12 @@
 		C687F9B01BB5481A003F5684 /* Network Engine */ = {
 			isa = PBXGroup;
 			children = (
-				C66B21A41BA910E80038DA8D /* ZPHttpClientAF.h */,
-				C66B21A51BA910E80038DA8D /* ZPHttpClientAF.m */,
-				C66B21A21BA910E80038DA8D /* ZPHttpAPIClient.h */,
-				C66B21A31BA910E80038DA8D /* ZPHttpAPIClient.m */,
+				0799B60A1BBE871100C3D071 /* Image Downloader */,
+				0799B5F61BBDE98000C3D071 /* Srikanth - AFNetworking */,
 				C68775971BB571E200B58562 /* RKNeworkEngine.h */,
 				C68775981BB571E200B58562 /* RKNeworkEngine.m */,
 				C687759A1BB571F500B58562 /* RKNetworkClient.h */,
 				C687759B1BB571F500B58562 /* RKNetworkClient.m */,
-				C6042FD11BB8900A0007608C /* RKImageDownloader.h */,
-				C6042FD21BB8900A0007608C /* RKImageDownloader.m */,
-				C6042FD41BB8925D0007608C /* RKImageFiltration.h */,
-				C6042FD51BB8925D0007608C /* RKImageFiltration.m */,
 			);
 			name = "Network Engine";
 			sourceTree = "<group>";
@@ -263,8 +281,6 @@
 				C6630F2C1BB408390023A608 /* sillunu oru kadhal.gif */,
 				C69114ED1BAB044100949CB3 /* DataModel.h */,
 				C69114EE1BAB044100949CB3 /* DataModel.m */,
-				C6042FCE1BB88F4B0007608C /* RKPendingOperations.h */,
-				C6042FCF1BB88F4B0007608C /* RKPendingOperations.m */,
 				C69239821BAB352B00592136 /* DownloadDataModel.h */,
 				C69239831BAB352B00592136 /* DownloadDataModel.m */,
 			);

@@ -17,7 +17,5 @@
 
 @property (nonatomic, strong) RKPendingOperations *pendingOperations;
 
-@property (nonatomic, strong) NSMutableArray *photos; // main data source of controller
-
 
 @end

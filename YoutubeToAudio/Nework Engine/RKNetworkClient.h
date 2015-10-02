@@ -9,20 +9,29 @@
 #import <Foundation/Foundation.h>
 #import "DataModel.h"
 
+
+typedef void(^RKFetchMostPopularVideos)(NSArray *popularVideos,NSError *error);
+
 @protocol RKHTTPClientProtocol <NSObject>
 
+#pragma mark - Fetch mostPopular Videos on Youtube
+- (id)fetchMostPopularVideosWithFetchCount:(int)fetchCount
+                                isFreshQuery:(BOOL)isFresh
+                                            :(RKFetchMostPopularVideos)block;
 
-- (void)fetchYoutubeVideosWithSearchQuery:(NSString*)query isFreshQuery:(BOOL)isFresh
+#pragma mark -
+- (id)fetchYoutubeVideosWithSearchQuery:(NSString*)query isFreshQuery:(BOOL)isFresh
                                fetchCount:(int)fetchCount
                                          :(void(^)(NSArray *models,NSError *error))block;
 
-
-
 - (void)fetchYTVideoMetaDataWithVideoID:(DataModel*)dataModel;
 
-- (void)fetchVideoDetails:(DataModel*)model :(void(^)(DataModel *dataModel,NSError *error))block;
+- (id)fetchVideoDetails:(DataModel*)model :(void(^)(DataModel *dataModel,NSError *error))block;
 
-- (void)fetchMostPopularVideosWithFetchCount:(int)fetchCount isFreshQuery:(BOOL)isFresh :(void(^)(NSArray *models,NSError *error))block;
+
+
+
+
 
 @end
 

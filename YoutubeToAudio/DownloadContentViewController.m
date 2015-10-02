@@ -135,7 +135,6 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
  __block NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@",self.model.title,downloadModel.extension]];
     
-    
     NSLog(@"%@",filePath);
     operation.outputStream = [NSOutputStream outputStreamToFileAtPath:filePath append:NO];
     

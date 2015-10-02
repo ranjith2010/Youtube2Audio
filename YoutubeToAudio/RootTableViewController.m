@@ -47,24 +47,30 @@
     [self.tableView registerNib:cellNib forCellReuseIdentifier:@"VideoTableViewCell"];
     self.searchBar.delegate = self;
     
+    // add some data regarding popular videos
+    [self pr_initialDataSetup];
+    
 //MARK:: add it later.
 //    [self addLongPressGesture];
     
+}
+
+- (void)pr_initialDataSetup {
     if(!self.RKHttpClient) {
         self.RKHttpClient = [RKNetworkClient sharedInstance];
     }
-//    [self.RKHttpClient fetchMostPopularVideosWithFetchCount:self.fetchCount isFreshQuery:YES
-//                                                           :^(NSArray *models, NSError *error) {
-//        self.dataSource = [NSMutableArray arrayWithArray:models];
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            self.isPopularSearch = YES;
-//            [self.tableView reloadData];
-//        });
-//    }];
+    id requestOperation = [self.RKHttpClient fetchMostPopularVideosWithFetchCount:self.fetchCount isFreshQuery:YES :^(NSArray *models, NSError *error) {
+        self.dataSource = [NSMutableArray arrayWithArray:models];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.isPopularSearch = YES;
+            [self.tableView reloadData];
+        });
+    }];
+    [self.pendingOperations.downloadQueue addOperation:requestOperation];
 }
 
 - (void)viewDidUnload {
-    [self setPhotos:nil];
+//    [self setPhotos:nil];
     [self setPendingOperations:nil];
     [super viewDidUnload];
 }
@@ -83,7 +89,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.photos.count;
+    return self.dataSource.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -94,62 +100,88 @@
     static NSString *kCellIdentifier = @"VideoTableViewCell";
     VideoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
 
-    
     if (!cell) {
         cell = [[VideoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        // 1
         UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         cell.accessoryView = activityIndicatorView;
         
     }
     
-    // 2
-    DataModel *aRecord = [self.photos objectAtIndex:indexPath.row];
+    DataModel *aRecord = [self.dataSource objectAtIndex:indexPath.row];
     
-    // 3
     if (aRecord.hasImage) {
         
         [((UIActivityIndicatorView *)cell.accessoryView) stopAnimating];
         cell.thumbnailImage.image = aRecord.videoImage;
         cell.title.text = aRecord.title;
-        
     }
-    // 4
     else if (aRecord.isFailed) {
         [((UIActivityIndicatorView *)cell.accessoryView) stopAnimating];
         cell.thumbnailImage.image = [UIImage imageNamed:@"Failed.png"];
         cell.title.text = @"Failed to load";
         
     }
-    // 5
     else {
         
         [((UIActivityIndicatorView *)cell.accessoryView) startAnimating];
-        cell.thumbnailImage.image = [UIImage imageNamed:@"Placeholder.png"];
+        cell.thumbnailImage.image = [UIImage imageNamed:@"default_image.png"];
         cell.title.text = @"";
 //        [self startOperationsForPhotoRecord:aRecord atIndexPath:indexPath];
         if (!tableView.dragging && !tableView.decelerating) {
             [self startOperationsForPhotoRecord:aRecord atIndexPath:indexPath];
         }
     }
+    [cell.mediaIndexLabel setTransform:CGAffineTransformMakeRotation(-M_PI / 2)];
+    cell.mediaIndexLabel.text = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
+    cell.DescriptionLabel.text = aRecord.videoDescription;
+    if(aRecord.videoDuration){
+        cell.mediaDurationLabel.text = aRecord.videoDuration;
+    }
+    else {
+        [cell.mediaDurationLabel setHidden:YES];
+        id downloadRequestOperation = [self.RKHttpClient fetchVideoDetails:aRecord :^(DataModel *dataModel, NSError *error) {
+            [cell.mediaDurationLabel setHidden:NO];
+            cell.mediaDurationLabel.text = dataModel.videoDuration;
+            aRecord.videoDuration = dataModel.videoDuration;
+            
+        }];
+        [self.pendingOperations.downloadQueue addOperation:downloadRequestOperation];
+    }
+    if(indexPath.row==self.dataSource.count-1) {
+        // It except more data. Fetch some more data.
+        self.needToAppend = YES;
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
+        if(self.isPopularSearch) {
+          id requestOperation  = [self.RKHttpClient fetchMostPopularVideosWithFetchCount:self.fetchCount isFreshQuery:NO  :^(NSArray *models, NSError *error) {
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [self loadData:models];
+            }];
+            [self.pendingOperations.downloadQueue addOperation:requestOperation];
+        }
+        else {
+       id requestOperation = [self.RKHttpClient fetchYoutubeVideosWithSearchQuery:nil isFreshQuery:NO fetchCount:self.fetchCount :^(NSArray *models, NSError *error) {
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [self loadData:models];
+                    }];
+            [self.pendingOperations.downloadQueue addOperation:requestOperation];
+        }
+    }
     return cell;
 }
-
 
 
 #pragma mark -
 #pragma mark - UIScrollView delegate
     
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    // 1
     [self suspendAllOperations];
 }
 
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    // 2
     if (!decelerate) {
         [self loadImagesForOnscreenCells];
         [self resumeAllOperations];
@@ -157,13 +189,9 @@
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    // 3
     [self loadImagesForOnscreenCells];
     [self resumeAllOperations];
 }
-    
-    
-
 
 #pragma mark - Cancelling, suspending, resuming queues / operations
 
@@ -215,49 +243,13 @@
     // 6
     for (NSIndexPath *anIndexPath in toBeStarted) {
         
-        DataModel *recordToProcess = [self.photos objectAtIndex:anIndexPath.row];
+        DataModel *recordToProcess = [self.dataSource objectAtIndex:anIndexPath.row];
         [self startOperationsForPhotoRecord:recordToProcess atIndexPath:anIndexPath];
     }
     toBeStarted = nil;
     
 }
     
-    
-    
-    
-    
-    
-#warning this is previous code!
- 
-//    VideoTableViewCell *videoTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"VideoTableViewCell" forIndexPath:indexPath];
-//    DataModel *model = [self.photos objectAtIndex:indexPath.row];
-    
-//    [videoTableViewCell feedCellWithObject:model];
-//    videoTableViewCell.mediaIndexLabel.text=[NSString stringWithFormat:@"%ld",(long)indexPath.row];
-////    NSLog(@"%@",indexPath);
-////    NSLog(@"%lu",(unsigned long)self.dataSource.count);
-//    if(indexPath.row==self.dataSource.count-1) {
-//        // It except more data. Fetch some more data.
-//        self.needToAppend = YES;
-//        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//        
-//        if(self.isPopularSearch) {
-//            [self.RKHttpClient fetchMostPopularVideosWithFetchCount:self.fetchCount isFreshQuery:NO  :^(NSArray *models, NSError *error) {
-//                [MBProgressHUD hideHUDForView:self.view animated:YES];
-//                [self loadData:models];
-//            }];
-//        }
-//        else {
-//        [self.RKHttpClient fetchYoutubeVideosWithSearchQuery:nil isFreshQuery:NO fetchCount:self.fetchCount :^(NSArray *models, NSError *error) {
-//            [MBProgressHUD hideHUDForView:self.view animated:YES];
-//            [self loadData:models];
-//                    }];
-//        }
-//    }
-//    return cell;
-//}
-
-
 
 // 1
 - (void)startOperationsForPhotoRecord:(DataModel *)record atIndexPath:(NSIndexPath *)indexPath {
@@ -274,13 +266,9 @@
 }
 
 
-
-
 - (void)startImageDownloadingForRecord:(DataModel *)record atIndexPath:(NSIndexPath *)indexPath {
-    // 1
     if (![self.pendingOperations.downloadsInProgress.allKeys containsObject:indexPath]) {
         
-        // 2
         // Start downloading
         RKImageDownloader *imageDownloader = [[RKImageDownloader alloc] initWithDataModel:record atIndexPath:indexPath delegate:self];
         [self.pendingOperations.downloadsInProgress setObject:imageDownloader forKey:indexPath];
@@ -289,14 +277,11 @@
 }
 
 - (void)startImageFiltrationForRecord:(DataModel *)record atIndexPath:(NSIndexPath *)indexPath {
-    // 3
     if (![self.pendingOperations.filtrationsInProgress.allKeys containsObject:indexPath]) {
         
-        // 4
         // Start filtration
         RKImageFiltration *imageFiltration = [[RKImageFiltration alloc] initWithDataModel:record atIndexPath:indexPath delegate:self];
         
-        // 5
         RKImageDownloader *dependency = [self.pendingOperations.downloadsInProgress objectForKey:indexPath];
         if (dependency)
             [imageFiltration addDependency:dependency];
@@ -308,12 +293,8 @@
 
 
 - (void)imageDownloaderDidFinish:(RKImageDownloader *)downloader {
-    
-    // 1
     NSIndexPath *indexPath = downloader.indexPathInTableView;
-    // 2
     [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    // 3
     [self.pendingOperations.downloadsInProgress removeObjectForKey:indexPath];
 }
 
@@ -322,28 +303,6 @@
     [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     [self.pendingOperations.filtrationsInProgress removeObjectForKey:indexPath];
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -409,7 +368,7 @@
     NSString *replaceStr=[searchBar.text stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
 
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [self.RKHttpClient fetchYoutubeVideosWithSearchQuery:replaceStr isFreshQuery:YES fetchCount:self.fetchCount :^(NSArray *models, NSError *error) {
+    id requestOperation = [self.RKHttpClient fetchYoutubeVideosWithSearchQuery:replaceStr isFreshQuery:YES fetchCount:self.fetchCount :^(NSArray *models, NSError *error) {
 
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         
@@ -430,7 +389,7 @@
             [self.tableView reloadData];
         });
     }];
-    
+    [self.pendingOperations.downloadQueue addOperation:requestOperation];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
@@ -469,7 +428,6 @@
 }
 
 
-
 -(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer
 {
     CGPoint p = [gestureRecognizer locationInView:self.tableView];
@@ -490,112 +448,5 @@
     }
     return _pendingOperations;
 }
-
-- (NSMutableArray *)photos {
-    
-    if (!_photos) {
-        
-        NSURL *datasourceURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&key=AIzaSyCYXlcV2F22Jsw5J_5KVWa3eYKd9oQiraw&maxResults=%d&type=video",self.fetchCount]];
-        NSURLRequest *request = [NSURLRequest requestWithURL:datasourceURL];
-        
-        AFHTTPRequestOperation *datasource_download_operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-        
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-        
-        [datasource_download_operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-            
-            NSData *datasource_data = (NSData *)responseObject;
-            
-            NSError* error;
-            NSDictionary* datasource_dictionary = [NSJSONSerialization JSONObjectWithData:datasource_data
-                                                                 options:kNilOptions
-                                                                   error:&error];
-            //        self.pageToken = json[@"nextPageToken"];
-            NSArray *items = datasource_dictionary[@"items"];
-            
-            // 6
-            NSMutableArray *records = [NSMutableArray array];
-            
-            for(NSDictionary *item in items) {
-                DataModel *model = [[DataModel alloc]initWithServerDictionary:item];
-                [records addObject:model];
-            }
-            
-            self.photos = records;
-            
-            [self.tableView reloadData];
-            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-            
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error){
-            
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops!"
-                                                            message:error.localizedDescription
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-            [alert show];
-            alert = nil;
-            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-        }];
-        
-        [self.pendingOperations.downloadQueue addOperation:datasource_download_operation];
-    }
-    return _photos;
-}
-
-
-
-//- (nsmutablea)fetchMostPopularVideosWithFetchCount:(int)fetchCount isFreshQuery:(BOOL)isFresh :(void (^)(NSArray *, NSError *))block {
-
-/*
-- (NSMutableArray *)photos {
-    
-    if (!_photos) {
-
-    NSString *finalString;
-    
-    if(!isFresh) {
-//        finalString = [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&key=AIzaSyCYXlcV2F22Jsw5J_5KVWa3eYKd9oQiraw&maxResults=%d&type=video&pageToken=%@",fetchCount,self.pageToken];
-    }
-    else {
-        finalString = [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/search?part=snippet&chart=mostPopular&key=AIzaSyCYXlcV2F22Jsw5J_5KVWa3eYKd9oQiraw&maxResults=%d&type=video",fetchCount];
-    }
-    
-    NSURL *url = [NSURL URLWithString:finalString];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc]
-                                         initWithRequest:request];
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation
-                                               , id responseObject) {
-        
-        NSError* error;
-        NSDictionary* json = [NSJSONSerialization JSONObjectWithData:responseObject
-                                                             options:kNilOptions
-                                                               error:&error];
-//        self.pageToken = json[@"nextPageToken"];
-        NSArray *items = json[@"items"];
-        NSMutableArray *buffer = [NSMutableArray new];
-        
-        for(NSDictionary *item in items) {
-            DataModel *model = [[DataModel alloc]initWithServerDictionary:item];
-            [buffer addObject:model];
-        }
-        
-        block(buffer,nil);
-        // code
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        // code
-        block(nil,error);
-    }
-     ];
-    [operation start];
-        // 9
-        [self.pendingOperations.downloadQueue addOperation:datasource_download_operation];
-    }
-    return _photos;
-}
-
- */
-
 
 @end

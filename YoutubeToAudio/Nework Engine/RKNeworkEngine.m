@@ -9,10 +9,10 @@
 #import "RKNeworkEngine.h"
 #import "AFNetworking.h"
 
-
 @interface RKNeworkEngine ()
 
-@property (nonatomic,strong) NSString *pageToken;
+@property(nonatomic,strong)NSString *pageToken;
+
 
 @end
 
@@ -35,7 +35,7 @@
     }];
 }
 
-- (void)fetchYoutubeVideosWithSearchQuery:(NSString*)query isFreshQuery:(BOOL)isFresh
+- (id)fetchYoutubeVideosWithSearchQuery:(NSString*)query isFreshQuery:(BOOL)isFresh
                                fetchCount:(int)fetchCount
                                          :(void(^)(NSArray *models,NSError *error))block  {
     
@@ -49,9 +49,10 @@
     
     NSURL *url = [NSURL URLWithString:finalString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc]
+    AFHTTPRequestOperation *datasource_download_operation = [[AFHTTPRequestOperation alloc]
                                          initWithRequest:request];
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation
+    __weak RKNeworkEngine *weakSelf = self;
+    [datasource_download_operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation
                                                , id responseObject) {
         
         NSError* error;
@@ -59,7 +60,7 @@
                                                              options:kNilOptions
                                                                error:&error];
         
-        self.pageToken = json[@"nextPageToken"];
+        weakSelf.pageToken = json[@"nextPageToken"];
         
         NSArray *items = json[@"items"];
         NSMutableArray *buffer = [NSMutableArray new];
@@ -75,14 +76,13 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         // code
         block(nil,error);
-    }
-     ];
-    [operation start];
+    }];
+    return datasource_download_operation;
 }
 
-
-- (void)fetchMostPopularVideosWithFetchCount:(int)fetchCount isFreshQuery:(BOOL)isFresh :(void (^)(NSArray *, NSError *))block {
-    
+- (id)fetchMostPopularVideosWithFetchCount:(int)fetchCount
+                                isFreshQuery:(BOOL)isFresh
+                                            :(RKFetchMostPopularVideos)block {
     NSString *finalString;
     
     if(!isFresh) {
@@ -94,16 +94,17 @@
     
     NSURL *url = [NSURL URLWithString:finalString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc]
+    AFHTTPRequestOperation *datasource_download_operation = [[AFHTTPRequestOperation alloc]
                                          initWithRequest:request];
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation
+    __weak RKNeworkEngine *weakSelf = self;
+    [datasource_download_operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation
                                                , id responseObject) {
         
         NSError* error;
         NSDictionary* json = [NSJSONSerialization JSONObjectWithData:responseObject
                                                              options:kNilOptions
                                                                error:&error];
-        self.pageToken = json[@"nextPageToken"];
+        weakSelf.pageToken = json[@"nextPageToken"];
         NSArray *items = json[@"items"];
         NSMutableArray *buffer = [NSMutableArray new];
         
@@ -111,26 +112,25 @@
             DataModel *model = [[DataModel alloc]initWithServerDictionary:item];
             [buffer addObject:model];
         }
-
         block(buffer,nil);
-        // code
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        // code
         block(nil,error);
-    }
-     ];
-    [operation start];
+    }];
+    return datasource_download_operation;
 }
 
 
-- (void)fetchVideoDetails:(DataModel*)model :(void(^)(DataModel *dataModel,NSError *error))block {
+
+- (id)fetchVideoDetails:(DataModel*)model :(void(^)(DataModel *dataModel,NSError *error))block {
     
    NSString *finalString = [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/videos?id=%@&part=contentDetails&key=AIzaSyCYXlcV2F22Jsw5J_5KVWa3eYKd9oQiraw",model.videoId];
     NSURL *url = [NSURL URLWithString:finalString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc]
+    AFHTTPRequestOperation *datasource_download_operation = [[AFHTTPRequestOperation alloc]
                                          initWithRequest:request];
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation
+    
+    __weak RKNeworkEngine *weakSelf = self;
+    [datasource_download_operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation
                                                , id responseObject) {
         
         NSError* error;
@@ -139,16 +139,13 @@
                                                                error:&error];
         NSArray *items = json[@"items"];
         NSDictionary *firstObject = items.firstObject;
-        model.videoDuration = [self parseDuration:firstObject[@"contentDetails"][@"duration"]];
-        NSLog(@"%@",model.videoDuration);
+        model.videoDuration = [weakSelf parseDuration:firstObject[@"contentDetails"][@"duration"]];
         block(model,nil);
-        // code
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        // code
         block(model,nil);
     }
      ];
-    [operation start];
+    return datasource_download_operation;
 }
 
 
@@ -189,5 +186,6 @@
     }
     return finalTime;
 }
+
 
 @end
