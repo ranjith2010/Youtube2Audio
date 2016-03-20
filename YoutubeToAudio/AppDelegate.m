@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "YoutubeToAudio-Swift.h"
 
 @interface AppDelegate ()
 
@@ -16,6 +17,8 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    YCConverterApp *ycConverterApp = [YCConverterApp new];
+    [ycConverterApp startAppWithLaunchOptions:launchOptions application:application window:self.window];
     return YES;
 }
 

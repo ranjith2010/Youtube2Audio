@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C6042FD01BB88F4B0007608C /* RKPendingOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = C6042FCF1BB88F4B0007608C /* RKPendingOperations.m */; settings = {ASSET_TAGS = (); }; };
-		C6042FD31BB8900A0007608C /* RKImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = C6042FD21BB8900A0007608C /* RKImageDownloader.m */; settings = {ASSET_TAGS = (); }; };
-		C6042FD61BB8925D0007608C /* RKImageFiltration.m in Sources */ = {isa = PBXBuildFile; fileRef = C6042FD51BB8925D0007608C /* RKImageFiltration.m */; settings = {ASSET_TAGS = (); }; };
+		07FB72CF1C9F1F7800B04780 /* Play Filled-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 07FB72CE1C9F1F7800B04780 /* Play Filled-50.png */; };
+		07FB72D21C9F232000B04780 /* YCConverterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FB72D11C9F232000B04780 /* YCConverterApp.swift */; };
+		C6042FD01BB88F4B0007608C /* RKPendingOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = C6042FCF1BB88F4B0007608C /* RKPendingOperations.m */; };
+		C6042FD31BB8900A0007608C /* RKImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = C6042FD21BB8900A0007608C /* RKImageDownloader.m */; };
+		C6042FD61BB8925D0007608C /* RKImageFiltration.m in Sources */ = {isa = PBXBuildFile; fileRef = C6042FD51BB8925D0007608C /* RKImageFiltration.m */; };
 		C605E3851BADF52E0012C410 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C605E3841BADF52E0012C410 /* AVFoundation.framework */; };
 		C60D335D1BB4030800323F1B /* VisualizerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C60D335C1BB4030800323F1B /* VisualizerView.m */; };
 		C634ECE41BAB5A5F00CF901F /* SandBoxTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C634ECE31BAB5A5F00CF901F /* SandBoxTableViewController.m */; };
@@ -37,7 +39,6 @@
 		C6ACD98C1BA8968B00AFA16C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6ACD98A1BA8968B00AFA16C /* Main.storyboard */; };
 		C6ACD98E1BA8968B00AFA16C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6ACD98D1BA8968B00AFA16C /* Assets.xcassets */; };
 		C6ACD9911BA8968B00AFA16C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6ACD98F1BA8968B00AFA16C /* LaunchScreen.storyboard */; };
-		C6C70FF41BB7459100B2FB15 /* Play Filled-50.png in Resources */ = {isa = PBXBuildFile; fileRef = C6C70FF31BB7459100B2FB15 /* Play Filled-50.png */; settings = {ASSET_TAGS = (); }; };
 		C6CBAA4D1BB44D81005D8C34 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6CBAA4C1BB44D81005D8C34 /* CoreMedia.framework */; };
 		C6CBAA511BB4649E005D8C34 /* RKPlayerEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = C6CBAA501BB4649E005D8C34 /* RKPlayerEngine.m */; };
 		C6CBAA541BB4689A005D8C34 /* RKPlayerClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C6CBAA531BB4689A005D8C34 /* RKPlayerClient.m */; };
@@ -48,6 +49,9 @@
 /* Begin PBXFileReference section */
 		042C76D9044BDB133D91CD81 /* Pods-YoutubeToAudio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YoutubeToAudio.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YoutubeToAudio/Pods-YoutubeToAudio.debug.xcconfig"; sourceTree = "<group>"; };
 		06877BAA82464C5A180E3450 /* libPods-YoutubeToAudio.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YoutubeToAudio.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		07FB72CE1C9F1F7800B04780 /* Play Filled-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Play Filled-50.png"; sourceTree = "<group>"; };
+		07FB72D01C9F231F00B04780 /* YoutubeToAudio-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YoutubeToAudio-Bridging-Header.h"; sourceTree = "<group>"; };
+		07FB72D11C9F232000B04780 /* YCConverterApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YCConverterApp.swift; sourceTree = "<group>"; };
 		BABB36C00D0B7509FE9ABA8F /* Pods-YoutubeToAudio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YoutubeToAudio.release.xcconfig"; path = "Pods/Target Support Files/Pods-YoutubeToAudio/Pods-YoutubeToAudio.release.xcconfig"; sourceTree = "<group>"; };
 		C6042FCE1BB88F4B0007608C /* RKPendingOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RKPendingOperations.h; path = Model/RKPendingOperations.h; sourceTree = "<group>"; };
 		C6042FCF1BB88F4B0007608C /* RKPendingOperations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RKPendingOperations.m; path = Model/RKPendingOperations.m; sourceTree = "<group>"; };
@@ -100,7 +104,6 @@
 		C6ACD98D1BA8968B00AFA16C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C6ACD9901BA8968B00AFA16C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C6ACD9921BA8968B00AFA16C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C6C70FF31BB7459100B2FB15 /* Play Filled-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Play Filled-50.png"; sourceTree = "<group>"; };
 		C6CBAA4C1BB44D81005D8C34 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		C6CBAA4F1BB4649E005D8C34 /* RKPlayerEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RKPlayerEngine.h; path = Player/RKPlayerEngine.h; sourceTree = "<group>"; };
 		C6CBAA501BB4649E005D8C34 /* RKPlayerEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RKPlayerEngine.m; path = Player/RKPlayerEngine.m; sourceTree = "<group>"; };
@@ -221,6 +224,7 @@
 				C687F9B01BB5481A003F5684 /* Network Engine */,
 				C6ACD9841BA8968B00AFA16C /* AppDelegate.h */,
 				C6ACD9851BA8968B00AFA16C /* AppDelegate.m */,
+				07FB72D11C9F232000B04780 /* YCConverterApp.swift */,
 				C6ACD98A1BA8968B00AFA16C /* Main.storyboard */,
 				C634ECE21BAB5A5F00CF901F /* SandBoxTableViewController.h */,
 				C634ECE31BAB5A5F00CF901F /* SandBoxTableViewController.m */,
@@ -232,6 +236,7 @@
 				C6ACD98F1BA8968B00AFA16C /* LaunchScreen.storyboard */,
 				C6ACD9921BA8968B00AFA16C /* Info.plist */,
 				C6ACD9811BA8968B00AFA16C /* Supporting Files */,
+				07FB72D01C9F231F00B04780 /* YoutubeToAudio-Bridging-Header.h */,
 			);
 			path = YoutubeToAudio;
 			sourceTree = "<group>";
@@ -290,8 +295,8 @@
 		C6F0F81F1BB218BB00B5BDA8 /* Image Assets */ = {
 			isa = PBXGroup;
 			children = (
-				C6C70FF31BB7459100B2FB15 /* Play Filled-50.png */,
 				C6CC26CD1BAC17B800AFAAEA /* default_image.png */,
+				07FB72CE1C9F1F7800B04780 /* Play Filled-50.png */,
 			);
 			name = "Image Assets";
 			sourceTree = "<group>";
@@ -325,6 +330,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = RK;
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = ranjith;
 				TargetAttributes = {
@@ -370,7 +376,7 @@
 				C692397E1BAB2D7800592136 /* DownloadContentTableViewCell.xib in Resources */,
 				C69114F41BAB0C7900949CB3 /* VideoTableViewCell.xib in Resources */,
 				C6ACD98E1BA8968B00AFA16C /* Assets.xcassets in Resources */,
-				C6C70FF41BB7459100B2FB15 /* Play Filled-50.png in Resources */,
+				07FB72CF1C9F1F7800B04780 /* Play Filled-50.png in Resources */,
 				C6CC26CE1BAC17B800AFAAEA /* default_image.png in Resources */,
 				C674975F1BB34BD600F04131 /* AudioTableViewCell.xib in Resources */,
 				C6ACD98C1BA8968B00AFA16C /* Main.storyboard in Resources */,
@@ -432,6 +438,7 @@
 				C692397D1BAB2D7800592136 /* DownloadContentTableViewCell.m in Sources */,
 				C6042FD01BB88F4B0007608C /* RKPendingOperations.m in Sources */,
 				C6CBAA511BB4649E005D8C34 /* RKPlayerEngine.m in Sources */,
+				07FB72D21C9F232000B04780 /* YCConverterApp.swift in Sources */,
 				C66B21A61BA910E80038DA8D /* ZPHttpAPIClient.m in Sources */,
 				C69239811BAB2F7000592136 /* DownloadContentViewController.m in Sources */,
 				C6CBAA541BB4689A005D8C34 /* RKPlayerClient.m in Sources */,
@@ -550,14 +557,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = YoutubeToAudio/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = come.mediamint.YoutubeToAudio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "YoutubeToAudio/YoutubeToAudio-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -567,14 +579,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = YoutubeToAudio/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = come.mediamint.YoutubeToAudio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "YoutubeToAudio/YoutubeToAudio-Bridging-Header.h";
 			};
 			name = Release;
 		};

@@ -34,6 +34,8 @@
 
 @property (nonatomic,weak)id<RKHTTPClientProtocol> RKHttpClient;
 
+@property (nonatomic)UIView *footerView;
+
 @end
 
 @implementation RootTableViewController
@@ -49,6 +51,7 @@
     
     // add some data regarding popular videos
     [self pr_initialDataSetup];
+    [self pr_addTableFooterView];
     
 //MARK:: add it later.
 //    [self addLongPressGesture];
@@ -93,7 +96,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 120;
+    return 100;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -112,20 +115,24 @@
     DataModel *aRecord = [self.dataSource objectAtIndex:indexPath.row];
     
     if (aRecord.hasImage) {
-        
-        [((UIActivityIndicatorView *)cell.accessoryView) stopAnimating];
+//        [((UIActivityIndicatorView *)cell.accessoryView) stopAnimating];
+        self.tableView.tableFooterView  = nil;
+        [(UIActivityIndicatorView *)[self.footerView viewWithTag:10] stopAnimating];
         cell.thumbnailImage.image = aRecord.videoImage;
         cell.title.text = aRecord.title;
     }
     else if (aRecord.isFailed) {
-        [((UIActivityIndicatorView *)cell.accessoryView) stopAnimating];
+//        [((UIActivityIndicatorView *)cell.accessoryView) stopAnimating];
+        self.tableView.tableFooterView  = nil;
+        [(UIActivityIndicatorView *)[self.footerView viewWithTag:10] stopAnimating];
         cell.thumbnailImage.image = [UIImage imageNamed:@"Failed.png"];
         cell.title.text = @"Failed to load";
         
     }
     else {
-        
-        [((UIActivityIndicatorView *)cell.accessoryView) startAnimating];
+        self.tableView.tableFooterView = self.footerView;
+        [(UIActivityIndicatorView *)[self.footerView viewWithTag:10] startAnimating];
+//        [((UIActivityIndicatorView *)cell.accessoryView) startAnimating];
         cell.thumbnailImage.image = [UIImage imageNamed:@"default_image.png"];
         cell.title.text = @"";
 //        [self startOperationsForPhotoRecord:aRecord atIndexPath:indexPath];
@@ -134,7 +141,7 @@
         }
     }
     [cell.mediaIndexLabel setTransform:CGAffineTransformMakeRotation(-M_PI / 2)];
-    cell.mediaIndexLabel.text = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
+    cell.mediaIndexLabel.text = [NSString stringWithFormat:@"%ld",(long)indexPath.row+1];
     cell.DescriptionLabel.text = aRecord.videoDescription;
     if(aRecord.videoDuration){
         cell.mediaDurationLabel.text = aRecord.videoDuration;
@@ -152,11 +159,12 @@
     if(indexPath.row==self.dataSource.count-1) {
         // It except more data. Fetch some more data.
         self.needToAppend = YES;
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-
+//        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        self.tableView.tableFooterView = self.footerView;
+        [(UIActivityIndicatorView *)[self.footerView viewWithTag:10] startAnimating];
         if(self.isPopularSearch) {
           id requestOperation  = [self.RKHttpClient fetchMostPopularVideosWithFetchCount:self.fetchCount isFreshQuery:NO  :^(NSArray *models, NSError *error) {
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
+//                [MBProgressHUD hideHUDForView:self.view animated:YES];
                 [self loadData:models];
             }];
             [self.pendingOperations.downloadQueue addOperation:requestOperation];
@@ -170,6 +178,25 @@
         }
     }
     return cell;
+}
+
+
+- (void)pr_addTableFooterView {
+    if(!self.footerView) {
+        self.footerView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 40.0)];
+    }
+    
+    UIActivityIndicatorView * actInd = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    
+    actInd.tag = 10;
+    
+    actInd.frame = CGRectMake(150.0, 5.0, 20.0, 20.0);
+    
+    actInd.hidesWhenStopped = YES;
+    
+    [self.footerView addSubview:actInd];
+    
+    actInd = nil;
 }
 
 
@@ -367,10 +394,10 @@
     
     NSString *replaceStr=[searchBar.text stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
 
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     id requestOperation = [self.RKHttpClient fetchYoutubeVideosWithSearchQuery:replaceStr isFreshQuery:YES fetchCount:self.fetchCount :^(NSArray *models, NSError *error) {
 
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+//        [MBProgressHUD hideHUDForView:self.view animated:YES];
         
         if(self.needToAppend) {
             [self.dataSource addObjectsFromArray:models];
