@@ -199,6 +199,19 @@
     actInd = nil;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    DataModel *dataModel = self.dataSource[indexPath.row];
+//    YCHomeNavigation *ycHomeNavigation = [YCHomeNavigation new];
+    [self.ycHomeNavigation presentDownloadContentViewControllerWithDataModel:dataModel];
+    
+//    DownloadContentViewController *downloadVC = [self.storyboard instantiateViewControllerWithIdentifier:@"DownloadContentViewController"];
+//    [downloadVC setModel:[self.dataSource objectAtIndex:indexPath.row]];
+//    //    DataModel *dataModel = [self.dataSource objectAtIndex:indexPath.row];
+//    //    [self fetchVideoDuration:dataModel :^(NSString *mediaDuration) {
+//    //
+//    //    }];
+//    [self.navigationController pushViewController:downloadVC animated:YES];
+}
 
 #pragma mark -
 #pragma mark - UIScrollView delegate
@@ -350,19 +363,6 @@
         [self.tableView reloadData];
     });
 
-}
-
-
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    DownloadContentViewController *downloadVC = [self.storyboard instantiateViewControllerWithIdentifier:@"DownloadContentViewController"];
-    [downloadVC setModel:[self.dataSource objectAtIndex:indexPath.row]];
-//    DataModel *dataModel = [self.dataSource objectAtIndex:indexPath.row];
-//    [self fetchVideoDuration:dataModel :^(NSString *mediaDuration) {
-//        
-//    }];
-    [self.navigationController pushViewController:downloadVC animated:YES];
 }
 
 

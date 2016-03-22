@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0727DB221C9FBD94006B66D1 /* YCHomeNavigationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0727DB211C9FBD94006B66D1 /* YCHomeNavigationProtocol.swift */; };
+		0727DB241C9FC16B006B66D1 /* YCHomeNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0727DB231C9FC16B006B66D1 /* YCHomeNavigation.swift */; };
 		07FB72CF1C9F1F7800B04780 /* Play Filled-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 07FB72CE1C9F1F7800B04780 /* Play Filled-50.png */; };
 		07FB72D21C9F232000B04780 /* YCConverterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FB72D11C9F232000B04780 /* YCConverterApp.swift */; };
 		C6042FD01BB88F4B0007608C /* RKPendingOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = C6042FCF1BB88F4B0007608C /* RKPendingOperations.m */; };
@@ -49,6 +51,9 @@
 /* Begin PBXFileReference section */
 		042C76D9044BDB133D91CD81 /* Pods-YoutubeToAudio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YoutubeToAudio.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YoutubeToAudio/Pods-YoutubeToAudio.debug.xcconfig"; sourceTree = "<group>"; };
 		06877BAA82464C5A180E3450 /* libPods-YoutubeToAudio.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YoutubeToAudio.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0727DB211C9FBD94006B66D1 /* YCHomeNavigationProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YCHomeNavigationProtocol.swift; path = Modules/Home/YCHomeNavigationProtocol.swift; sourceTree = "<group>"; };
+		0727DB231C9FC16B006B66D1 /* YCHomeNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YCHomeNavigation.swift; path = Modules/Home/YCHomeNavigation.swift; sourceTree = "<group>"; };
+		07F559931C9FF25B0044616D /* YoutubeToAudio-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YoutubeToAudio-Prefix.pch"; sourceTree = "<group>"; };
 		07FB72CE1C9F1F7800B04780 /* Play Filled-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Play Filled-50.png"; sourceTree = "<group>"; };
 		07FB72D01C9F231F00B04780 /* YoutubeToAudio-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YoutubeToAudio-Bridging-Header.h"; sourceTree = "<group>"; };
 		07FB72D11C9F232000B04780 /* YCConverterApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YCConverterApp.swift; sourceTree = "<group>"; };
@@ -128,6 +133,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0727DB1F1C9FBD44006B66D1 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				0727DB201C9FBD4E006B66D1 /* Home */,
+			);
+			name = Modules;
+			sourceTree = "<group>";
+		};
+		0727DB201C9FBD4E006B66D1 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				0727DB211C9FBD94006B66D1 /* YCHomeNavigationProtocol.swift */,
+				0727DB231C9FC16B006B66D1 /* YCHomeNavigation.swift */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
 		0799B5F61BBDE98000C3D071 /* Srikanth - AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
@@ -216,6 +238,7 @@
 		C6ACD9801BA8968B00AFA16C /* YoutubeToAudio */ = {
 			isa = PBXGroup;
 			children = (
+				0727DB1F1C9FBD44006B66D1 /* Modules */,
 				C6CBAA4E1BB46462005D8C34 /* Player */,
 				C6F0F81F1BB218BB00B5BDA8 /* Image Assets */,
 				C6F0F81E1BB2157500B5BDA8 /* Model */,
@@ -244,6 +267,7 @@
 		C6ACD9811BA8968B00AFA16C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				07F559931C9FF25B0044616D /* YoutubeToAudio-Prefix.pch */,
 				C6ACD9821BA8968B00AFA16C /* main.m */,
 			);
 			name = "Supporting Files";
@@ -329,7 +353,7 @@
 		C6ACD9761BA8968B00AFA16C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = RK;
+				CLASSPREFIX = YC;
 				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = ranjith;
@@ -431,6 +455,7 @@
 				C674975E1BB34BD600F04131 /* AudioTableViewCell.m in Sources */,
 				C69239751BAB293400592136 /* MBProgressHUD.m in Sources */,
 				C68775991BB571E200B58562 /* RKNeworkEngine.m in Sources */,
+				0727DB221C9FBD94006B66D1 /* YCHomeNavigationProtocol.swift in Sources */,
 				C69239841BAB352B00592136 /* DownloadDataModel.m in Sources */,
 				C634ECE41BAB5A5F00CF901F /* SandBoxTableViewController.m in Sources */,
 				C69114EC1BAB029F00949CB3 /* RootTableViewController.m in Sources */,
@@ -445,6 +470,7 @@
 				C66B21A71BA910E80038DA8D /* ZPHttpClientAF.m in Sources */,
 				C60D335D1BB4030800323F1B /* VisualizerView.m in Sources */,
 				C687759C1BB571F500B58562 /* RKNetworkClient.m in Sources */,
+				0727DB241C9FC16B006B66D1 /* YCHomeNavigation.swift in Sources */,
 				C6042FD31BB8900A0007608C /* RKImageDownloader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -562,6 +588,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/YoutubeToAudio-Prefix.pch";
 				INFOPLIST_FILE = YoutubeToAudio/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -584,6 +612,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/YoutubeToAudio-Prefix.pch";
 				INFOPLIST_FILE = YoutubeToAudio/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

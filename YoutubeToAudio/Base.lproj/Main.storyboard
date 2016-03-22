@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="qRN-4P-c8b">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="gCy-hU-f7u">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -15,13 +15,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" placeholder="Search Video" id="hDR-KQ-m02">
-                            <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="nFG-Xu-ybP">
-                                <rect key="frame" x="0.0" y="136" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="72" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nFG-Xu-ybP" id="xtq-wg-XTo">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -160,26 +160,6 @@
             </objects>
             <point key="canvasLocation" x="1231" y="751"/>
         </scene>
-        <!--Youtube-->
-        <scene sceneID="FKM-jF-gNG">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jIo-Tf-Mf9" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Youtube" id="uBw-nD-99s"/>
-                    <toolbarItems/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Lal-uW-Cfx">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="gCy-hU-f7u" kind="relationship" relationship="rootViewController" id="6O9-2f-xqP"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xCy-Pl-4r9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="364" y="731"/>
-        </scene>
         <!--Sand Box Table View Controller-->
         <scene sceneID="yOT-hg-XQS">
             <objects>
@@ -210,31 +190,13 @@
             </objects>
             <point key="canvasLocation" x="962" y="1446"/>
         </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="TkL-FU-bM9">
-            <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="qRN-4P-c8b" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="Huq-yb-sPh">
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="jIo-Tf-Mf9" kind="relationship" relationship="viewControllers" id="WKy-qE-ZxJ"/>
-                        <segue destination="IFe-sz-1Zd" kind="relationship" relationship="viewControllers" id="VbW-03-anc"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="99m-hV-2L7" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-308" y="731"/>
-        </scene>
         <!--SandBox-->
         <scene sceneID="BsA-Hb-fTH">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IFe-sz-1Zd" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="SandBox" id="waC-zS-dTD"/>
                     <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="YN4-O6-sGb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
