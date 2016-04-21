@@ -10,14 +10,12 @@
 #import "VideoTableViewCell.h"
 #import "MBProgressHUD.h"
 #import "DownloadContentViewController.h"
-#import "ZPHttpAPIClient.h"
-#import "ZPHttpClientAF.h"
 
 #import "RKNetworkClient.h"
 #import "RKNeworkEngine.h"
 
 
-@interface RootTableViewController ()<NSURLConnectionDelegate,UISearchDisplayDelegate,UISearchBarDelegate,UIGestureRecognizerDelegate>
+@interface RootTableViewController ()<NSURLConnectionDelegate,UISearchDisplayDelegate,UISearchBarDelegate,UIGestureRecognizerDelegate,YCLongTaskViewProtocol>
 
 @property (nonatomic,strong) NSMutableArray *dataSource;
 @property (nonatomic) NSMutableData *responseData;
@@ -27,7 +25,6 @@
 @property (nonatomic) int fetchCount;
 
 @property (nonatomic)BOOL needToAppend;
-@property (nonatomic,weak)id<ZPHttpAPIClientProtocol> ZPHttpClient;
 
 @property (nonatomic)BOOL isPopularSearch;
 
@@ -43,6 +40,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.fetchCount = 10;
     
     UINib* cellNib = [UINib nibWithNibName:@"VideoTableViewCell" bundle:nil];

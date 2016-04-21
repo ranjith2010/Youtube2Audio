@@ -16,7 +16,8 @@ class YCConverterApp: NSObject {
     }()
     override init() {
     }
-    internal func startAppWithLaunchOptions(launchOptions:[String:AnyObject],application:UIApplication,window:UIWindow) {
+    func startAppWithLaunchOptions(launchOptions:[String:AnyObject],application:UIApplication,window:UIWindow) {
+        
         let rootTableViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("RootTableViewController") as! RootTableViewController
         let homeTabBarItem = UITabBarItem.init(title: "Home", image: (UIImage.init(named: "HomeIcon")), selectedImage:(UIImage.init(named: "HomeIcon")))
         rootTableViewController.title = "Home"
@@ -24,8 +25,18 @@ class YCConverterApp: NSObject {
         navigationController.tabBarItem = homeTabBarItem
         rootTableViewController.ycHomeNavigation = YCHomeNavigation()
         rootTableViewController.ycHomeNavigation.navigationController = navigationController
-        tabBarController .setViewControllers([navigationController], animated: true)
+        
+        let sandBoxTableViewController = sandboxTableViewController()
+        sandBoxTableViewController.title = "Downloads"
+        let navigationControllerForSandBoxTVC = UINavigationController.init(rootViewController: sandBoxTableViewController)
+        let sandBoxTabBarItem = UITabBarItem.init(title: "Downloads", image: (UIImage.init(named: "HomeIcon")), selectedImage:(UIImage.init(named: "HomeIcon")))
+        navigationControllerForSandBoxTVC.tabBarItem = sandBoxTabBarItem
+        tabBarController .setViewControllers([navigationController,navigationControllerForSandBoxTVC], animated: true)
         window.rootViewController = tabBarController
+    }
+    
+    private func sandboxTableViewController() ->SandBoxTableViewController {
+        return UIStoryboard.init(name:"Main",bundle:nil).instantiateViewControllerWithIdentifier("SandBoxTableViewController") as! SandBoxTableViewController
     }
 }
 

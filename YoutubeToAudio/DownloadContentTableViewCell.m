@@ -10,13 +10,14 @@
 
 @interface DownloadContentTableViewCell ()
 @property (copy, nonatomic) void(^DidTapButtonBlock)(id sender);
+@property (weak, nonatomic) IBOutlet UIButton *downloadButtonOutlet;
 
 @end
 
 @implementation DownloadContentTableViewCell
 
 - (void)awakeFromNib {
-    // Initialization code
+    [self.downloadButtonOutlet yc_applyLayerAttributes];
 }
 
 
@@ -36,5 +37,6 @@
 
     // Configure the view for the selected state
 }
+
 
 @end

@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		0727DB221C9FBD94006B66D1 /* YCHomeNavigationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0727DB211C9FBD94006B66D1 /* YCHomeNavigationProtocol.swift */; };
 		0727DB241C9FC16B006B66D1 /* YCHomeNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0727DB231C9FC16B006B66D1 /* YCHomeNavigation.swift */; };
+		0741C6861CA70E7F00D85122 /* YCButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0741C6851CA70E7F00D85122 /* YCButtonExtension.swift */; };
+		0741C68E1CA71A1100D85122 /* YCTableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0741C68D1CA71A1100D85122 /* YCTableViewExtension.swift */; };
+		0741C6901CA71B2900D85122 /* YCLongTaskViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0741C68F1CA71B2900D85122 /* YCLongTaskViewHelper.swift */; };
+		0741C6921CA71B4400D85122 /* YCLongTaskViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0741C6911CA71B4400D85122 /* YCLongTaskViewProtocol.swift */; };
+		0741C6951CA7CB5F00D85122 /* YCAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0741C6941CA7CB5F00D85122 /* YCAlertControllerExtension.swift */; };
+		0741C6971CA8117A00D85122 /* YCViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0741C6961CA8117A00D85122 /* YCViewControllerExtension.swift */; };
 		07FB72CF1C9F1F7800B04780 /* Play Filled-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 07FB72CE1C9F1F7800B04780 /* Play Filled-50.png */; };
 		07FB72D21C9F232000B04780 /* YCConverterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FB72D11C9F232000B04780 /* YCConverterApp.swift */; };
 		C6042FD01BB88F4B0007608C /* RKPendingOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = C6042FCF1BB88F4B0007608C /* RKPendingOperations.m */; };
@@ -18,8 +24,6 @@
 		C60D335D1BB4030800323F1B /* VisualizerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C60D335C1BB4030800323F1B /* VisualizerView.m */; };
 		C634ECE41BAB5A5F00CF901F /* SandBoxTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C634ECE31BAB5A5F00CF901F /* SandBoxTableViewController.m */; };
 		C6630F2D1BB408390023A608 /* sillunu oru kadhal.gif in Resources */ = {isa = PBXBuildFile; fileRef = C6630F2C1BB408390023A608 /* sillunu oru kadhal.gif */; };
-		C66B21A61BA910E80038DA8D /* ZPHttpAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C66B21A31BA910E80038DA8D /* ZPHttpAPIClient.m */; };
-		C66B21A71BA910E80038DA8D /* ZPHttpClientAF.m in Sources */ = {isa = PBXBuildFile; fileRef = C66B21A51BA910E80038DA8D /* ZPHttpClientAF.m */; };
 		C674975E1BB34BD600F04131 /* AudioTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C674975C1BB34BD600F04131 /* AudioTableViewCell.m */; };
 		C674975F1BB34BD600F04131 /* AudioTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C674975D1BB34BD600F04131 /* AudioTableViewCell.xib */; };
 		C67497621BB34EB400F04131 /* SandBoxMediaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C67497611BB34EB400F04131 /* SandBoxMediaModel.m */; };
@@ -53,6 +57,12 @@
 		06877BAA82464C5A180E3450 /* libPods-YoutubeToAudio.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YoutubeToAudio.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0727DB211C9FBD94006B66D1 /* YCHomeNavigationProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YCHomeNavigationProtocol.swift; path = Modules/Home/YCHomeNavigationProtocol.swift; sourceTree = "<group>"; };
 		0727DB231C9FC16B006B66D1 /* YCHomeNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YCHomeNavigation.swift; path = Modules/Home/YCHomeNavigation.swift; sourceTree = "<group>"; };
+		0741C6851CA70E7F00D85122 /* YCButtonExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YCButtonExtension.swift; path = Categories/YCButtonExtension.swift; sourceTree = "<group>"; };
+		0741C68D1CA71A1100D85122 /* YCTableViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YCTableViewExtension.swift; path = Categories/YCTableViewExtension.swift; sourceTree = "<group>"; };
+		0741C68F1CA71B2900D85122 /* YCLongTaskViewHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YCLongTaskViewHelper.swift; path = ModulesCommon/YCLongTaskViewHelper.swift; sourceTree = "<group>"; };
+		0741C6911CA71B4400D85122 /* YCLongTaskViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YCLongTaskViewProtocol.swift; path = ModulesCommon/YCLongTaskViewProtocol.swift; sourceTree = "<group>"; };
+		0741C6941CA7CB5F00D85122 /* YCAlertControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YCAlertControllerExtension.swift; path = ModulesCommon/YCAlertControllerExtension.swift; sourceTree = "<group>"; };
+		0741C6961CA8117A00D85122 /* YCViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YCViewControllerExtension.swift; path = Categories/YCViewControllerExtension.swift; sourceTree = "<group>"; };
 		07F559931C9FF25B0044616D /* YoutubeToAudio-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YoutubeToAudio-Prefix.pch"; sourceTree = "<group>"; };
 		07FB72CE1C9F1F7800B04780 /* Play Filled-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Play Filled-50.png"; sourceTree = "<group>"; };
 		07FB72D01C9F231F00B04780 /* YoutubeToAudio-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YoutubeToAudio-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -70,10 +80,6 @@
 		C634ECE21BAB5A5F00CF901F /* SandBoxTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SandBoxTableViewController.h; sourceTree = "<group>"; };
 		C634ECE31BAB5A5F00CF901F /* SandBoxTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SandBoxTableViewController.m; sourceTree = "<group>"; };
 		C6630F2C1BB408390023A608 /* sillunu oru kadhal.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "sillunu oru kadhal.gif"; sourceTree = "<group>"; };
-		C66B21A21BA910E80038DA8D /* ZPHttpAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZPHttpAPIClient.h; sourceTree = "<group>"; };
-		C66B21A31BA910E80038DA8D /* ZPHttpAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZPHttpAPIClient.m; sourceTree = "<group>"; };
-		C66B21A41BA910E80038DA8D /* ZPHttpClientAF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZPHttpClientAF.h; sourceTree = "<group>"; };
-		C66B21A51BA910E80038DA8D /* ZPHttpClientAF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZPHttpClientAF.m; sourceTree = "<group>"; };
 		C674975B1BB34BD600F04131 /* AudioTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioTableViewCell.h; path = CustomTableView/AudioTableViewCell.h; sourceTree = "<group>"; };
 		C674975C1BB34BD600F04131 /* AudioTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AudioTableViewCell.m; path = CustomTableView/AudioTableViewCell.m; sourceTree = "<group>"; };
 		C674975D1BB34BD600F04131 /* AudioTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AudioTableViewCell.xib; path = CustomTableView/AudioTableViewCell.xib; sourceTree = "<group>"; };
@@ -150,15 +156,32 @@
 			name = Home;
 			sourceTree = "<group>";
 		};
-		0799B5F61BBDE98000C3D071 /* Srikanth - AFNetworking */ = {
+		0741C6871CA7101700D85122 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				C66B21A41BA910E80038DA8D /* ZPHttpClientAF.h */,
-				C66B21A51BA910E80038DA8D /* ZPHttpClientAF.m */,
-				C66B21A21BA910E80038DA8D /* ZPHttpAPIClient.h */,
-				C66B21A31BA910E80038DA8D /* ZPHttpAPIClient.m */,
+				0741C6851CA70E7F00D85122 /* YCButtonExtension.swift */,
+				0741C68D1CA71A1100D85122 /* YCTableViewExtension.swift */,
+				0741C6961CA8117A00D85122 /* YCViewControllerExtension.swift */,
 			);
-			name = "Srikanth - AFNetworking";
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		0741C6881CA7198100D85122 /* ModulesCommon */ = {
+			isa = PBXGroup;
+			children = (
+				0741C6931CA7CB4300D85122 /* Categories */,
+				0741C68F1CA71B2900D85122 /* YCLongTaskViewHelper.swift */,
+				0741C6911CA71B4400D85122 /* YCLongTaskViewProtocol.swift */,
+			);
+			name = ModulesCommon;
+			sourceTree = "<group>";
+		};
+		0741C6931CA7CB4300D85122 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				0741C6941CA7CB5F00D85122 /* YCAlertControllerExtension.swift */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 		0799B60A1BBE871100C3D071 /* Image Downloader */ = {
@@ -199,7 +222,6 @@
 			isa = PBXGroup;
 			children = (
 				0799B60A1BBE871100C3D071 /* Image Downloader */,
-				0799B5F61BBDE98000C3D071 /* Srikanth - AFNetworking */,
 				C68775971BB571E200B58562 /* RKNeworkEngine.h */,
 				C68775981BB571E200B58562 /* RKNeworkEngine.m */,
 				C687759A1BB571F500B58562 /* RKNetworkClient.h */,
@@ -238,6 +260,8 @@
 		C6ACD9801BA8968B00AFA16C /* YoutubeToAudio */ = {
 			isa = PBXGroup;
 			children = (
+				0741C6881CA7198100D85122 /* ModulesCommon */,
+				0741C6871CA7101700D85122 /* Categories */,
 				0727DB1F1C9FBD44006B66D1 /* Modules */,
 				C6CBAA4E1BB46462005D8C34 /* Player */,
 				C6F0F81F1BB218BB00B5BDA8 /* Image Assets */,
@@ -356,11 +380,11 @@
 				CLASSPREFIX = YC;
 				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0710;
-				ORGANIZATIONNAME = ranjith;
+				ORGANIZATIONNAME = iTag;
 				TargetAttributes = {
 					C6ACD97D1BA8968B00AFA16C = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 6RD248UBW6;
+						DevelopmentTeam = Z9QXLTCQ9V;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -455,19 +479,23 @@
 				C674975E1BB34BD600F04131 /* AudioTableViewCell.m in Sources */,
 				C69239751BAB293400592136 /* MBProgressHUD.m in Sources */,
 				C68775991BB571E200B58562 /* RKNeworkEngine.m in Sources */,
+				0741C68E1CA71A1100D85122 /* YCTableViewExtension.swift in Sources */,
 				0727DB221C9FBD94006B66D1 /* YCHomeNavigationProtocol.swift in Sources */,
 				C69239841BAB352B00592136 /* DownloadDataModel.m in Sources */,
 				C634ECE41BAB5A5F00CF901F /* SandBoxTableViewController.m in Sources */,
+				0741C6861CA70E7F00D85122 /* YCButtonExtension.swift in Sources */,
 				C69114EC1BAB029F00949CB3 /* RootTableViewController.m in Sources */,
 				C69114EF1BAB044100949CB3 /* DataModel.m in Sources */,
 				C692397D1BAB2D7800592136 /* DownloadContentTableViewCell.m in Sources */,
 				C6042FD01BB88F4B0007608C /* RKPendingOperations.m in Sources */,
+				0741C6951CA7CB5F00D85122 /* YCAlertControllerExtension.swift in Sources */,
+				0741C6901CA71B2900D85122 /* YCLongTaskViewHelper.swift in Sources */,
 				C6CBAA511BB4649E005D8C34 /* RKPlayerEngine.m in Sources */,
 				07FB72D21C9F232000B04780 /* YCConverterApp.swift in Sources */,
-				C66B21A61BA910E80038DA8D /* ZPHttpAPIClient.m in Sources */,
+				0741C6921CA71B4400D85122 /* YCLongTaskViewProtocol.swift in Sources */,
 				C69239811BAB2F7000592136 /* DownloadContentViewController.m in Sources */,
+				0741C6971CA8117A00D85122 /* YCViewControllerExtension.swift in Sources */,
 				C6CBAA541BB4689A005D8C34 /* RKPlayerClient.m in Sources */,
-				C66B21A71BA910E80038DA8D /* ZPHttpClientAF.m in Sources */,
 				C60D335D1BB4030800323F1B /* VisualizerView.m in Sources */,
 				C687759C1BB571F500B58562 /* RKNetworkClient.m in Sources */,
 				0727DB241C9FC16B006B66D1 /* YCHomeNavigation.swift in Sources */,
@@ -591,7 +619,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/YoutubeToAudio-Prefix.pch";
 				INFOPLIST_FILE = YoutubeToAudio/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = come.mediamint.YoutubeToAudio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -615,7 +643,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/YoutubeToAudio-Prefix.pch";
 				INFOPLIST_FILE = YoutubeToAudio/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = come.mediamint.YoutubeToAudio;
 				PRODUCT_NAME = "$(TARGET_NAME)";

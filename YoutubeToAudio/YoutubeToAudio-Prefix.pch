@@ -17,5 +17,6 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import "YoutubeToAudio-Swift.h"
+#define YC_ERR_DOMAIN @"com.youtubeConverter"
 
 #endif

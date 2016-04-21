@@ -9,14 +9,11 @@
 import Foundation
 import UIKit
 
-class YCHomeNavigation: NSObject {
-     var navigationController:UINavigationController!
-    
+class YCHomeNavigation: NSObject,YCHomeNavigationProtocol {
+    var navigationController:UINavigationController!
     func presentDownloadContentViewControllerWithDataModel(dataModel: DataModel) {
         let downloadContentViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("DownloadContentViewController") as! DownloadContentViewController
-        
         downloadContentViewController.model = dataModel
-//        self.navigationCon = navigationControler
         navigationController!.pushViewController(downloadContentViewController, animated: true)
     }
 }

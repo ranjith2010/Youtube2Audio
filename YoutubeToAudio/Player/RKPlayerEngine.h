@@ -8,9 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "RKPlayerClient.h"
-#warning add .PCH file
-#import <UIKit/UIKit.h>
-
 
 @interface RKPlayerEngine : NSObject<RKPlayerAPIClientProtocol>
 

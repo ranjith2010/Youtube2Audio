@@ -9,5 +9,8 @@
 import Foundation
 
 @objc protocol YCHomeNavigationProtocol:class {
-//    func presentDownloadContentViewControllerWithDataModel(dataModel: DataModel)
+    var navigationController:UINavigationController! {
+        get set
+    }
+    func presentDownloadContentViewControllerWithDataModel(dataModel: DataModel)
 }

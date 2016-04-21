@@ -8,14 +8,13 @@
 
 #import "DownloadContentViewController.h"
 #import "DownloadContentTableViewCell.h"
-#import "ZPHttpAPIClient.h"
 #import "AFNetworking.h"
 
 #import <UNIRest.h>
 #import <AudioToolbox/AudioToolbox.h>
 @import AVFoundation;
 
-@interface DownloadContentViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface DownloadContentViewController ()<UITableViewDataSource,UITableViewDelegate,YCLongTaskViewProtocol>
 
 @property (nonatomic) NSMutableData *responseData;
 
@@ -23,10 +22,13 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *channelTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *publishedAtLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *containerViewHeightLayoutConstraint;
 
-@property (nonatomic)id<ZPHttpAPIClientProtocol>zphttpClient;
+@property (weak, nonatomic) IBOutlet UIView *containerView;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeightLayoutConstraint;
 @property (nonatomic,strong) NSArray *dataSource;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end
 
@@ -34,7 +36,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.zphttpClient = [ZPHttpAPIClient sharedInstance];
     
     self.videoThumnailView.image = self.model.videoImage;
     self.channelTitleLabel.text = self.model.channelTitle;
@@ -45,16 +46,26 @@
     [self.tableView registerNib:cellNib forCellReuseIdentifier:@"DownloadContentTableViewCell"];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.scrollEnabled = NO;
     [self fetchVideoUrl];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.parentViewController.tabBarController.tabBar.hidden = YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    self.parentViewController.tabBarController.tabBar.hidden = NO;
 }
 
 - (void)fetchVideoUrl {
     self.tableView.hidden = YES;
-    
     // These code snippets use an open-source library. http://unirest.io/objective-c
     NSDictionary *headers = @{@"X-Mashape-Key": @"FAhSz7kJnqmshDd5reChMrR30TwEp1BHToijsnUTEqlHEjPMX4", @"Content-Type": @"application/x-www-form-urlencoded", @"Accept": @"application/json"};
     NSDictionary *parameters = @{@"url": [NSString stringWithFormat:@"https://www.youtube.com/watch?v=%@",self.model.videoId]};
-    UNIUrlConnection *asyncConnection = [[UNIRest post:^(UNISimpleRequest *request) {
+    [[UNIRest post:^(UNISimpleRequest *request) {
         [request setUrl:@"https://savedeo.p.mashape.com/download"];
         [request setHeaders:headers];
         [request setParameters:parameters];
@@ -71,7 +82,9 @@
         NSArray *items = json[@"formats"];
         
         NSMutableArray *buffer = [NSMutableArray new];
-        
+        if(items && items.count) {
+            self.tableView.hidden = NO;
+        }
         for(NSDictionary *item in items) {
             DownloadDataModel *model = [[DownloadDataModel alloc]initWithServerDictionary:item];
             [buffer addObject:model];
@@ -79,14 +92,15 @@
         
         if(!self.dataSource) {
             self.dataSource = [NSArray arrayWithArray:buffer];
+            int tableViewHeight = self.dataSource.count * 55;
+            self.tableViewHeightLayoutConstraint.constant = tableViewHeight;
+//            self.containerViewHeightLayoutConstraint.constant = self.tableView.bounds.origin.y + self.tableViewHeightLayoutConstraint.constant+44;
+//            self.scrollView.contentSize = CGSizeMake(self.scrollView.bounds.size.width, 2000);
         }
-        
-        dispatch_async(dispatch_get_main_queue(),
-                       ^{
-                           self.tableView.hidden = NO;
-                           [self.tableView reloadData];
-                           
-                       });
+        dispatch_async(dispatch_get_main_queue(),^{
+            [self.tableView reloadData];
+            [self.view layoutIfNeeded];
+        });
     }];
 }
 
@@ -107,7 +121,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 90;
+    return 55;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -146,7 +160,7 @@
         NSLog(@"downloadComplete!");
     }];
     [operation start];
-    
 }
+
 
 @end

@@ -7,9 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 @import AVFoundation;
-
 
 /*!
  @abstract:This protocol response is update any UI related stuff.

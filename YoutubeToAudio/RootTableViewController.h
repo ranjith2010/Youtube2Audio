@@ -18,5 +18,5 @@
 @interface RootTableViewController : UITableViewController<ImageDownloaderDelegate, ImageFiltrationDelegate>
 
 @property (nonatomic, strong) RKPendingOperations *pendingOperations;
-@property (nonatomic,strong)YCHomeNavigation *ycHomeNavigation;
+@property (nonatomic,strong)id<YCHomeNavigationProtocol>ycHomeNavigation;
 @end
