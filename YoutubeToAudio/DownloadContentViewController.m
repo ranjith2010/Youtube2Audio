@@ -14,7 +14,7 @@
 #import <AudioToolbox/AudioToolbox.h>
 @import AVFoundation;
 
-@interface DownloadContentViewController ()<UITableViewDataSource,UITableViewDelegate,YCLongTaskViewProtocol>
+@interface DownloadContentViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic) NSMutableData *responseData;
 
@@ -36,7 +36,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+        
     self.videoThumnailView.image = self.model.videoImage;
     self.channelTitleLabel.text = self.model.channelTitle;
     self.publishedAtLabel.text = self.model.publishedAt;
@@ -86,8 +86,10 @@
             self.tableView.hidden = NO;
         }
         for(NSDictionary *item in items) {
-            DownloadDataModel *model = [[DownloadDataModel alloc]initWithServerDictionary:item];
-            [buffer addObject:model];
+            if([item[@"ext"]isEqualToString:@"m4a"]) {
+                DownloadDataModel *model = [[DownloadDataModel alloc]initWithServerDictionary:item];
+                [buffer addObject:model];
+            }
         }
         
         if(!self.dataSource) {
@@ -98,7 +100,7 @@
 //            self.scrollView.contentSize = CGSizeMake(self.scrollView.bounds.size.width, 2000);
         }
         dispatch_async(dispatch_get_main_queue(),^{
-            [self.tableView reloadData];
+            [self.tableView yc_reloadDataWithHideEmptyCell];
             [self.view layoutIfNeeded];
         });
     }];
@@ -128,6 +130,18 @@
     return @"Supported File Formats";
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    UILabel *myLabel = [[UILabel alloc] init];
+    myLabel.frame = CGRectMake(20, 8, 320, 20);
+    myLabel.font = [UIFont fontWithName:@"Gill Sans-Regular" size:16.0];
+    myLabel.text = [self tableView:tableView titleForHeaderInSection:section];
+    
+    UIView *headerView = [[UIView alloc] init];
+    [headerView addSubview:myLabel];
+    return headerView;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     DownloadContentTableViewCell *downloadTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"DownloadContentTableViewCell" forIndexPath:indexPath];
     DownloadDataModel *model = [self.dataSource objectAtIndex:indexPath.row];
@@ -142,7 +156,7 @@
 }
 
 - (void)buttonActionWithIndexPath:(DownloadDataModel *)downloadModel {
-    
+    [[YCUtilityManager MBProgressUtility]showBusyIndicatorWithMessage:@"Downloading" image:nil viewControllerToShow:self];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:downloadModel.downloadUrl]];
     AFURLConnectionOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     
@@ -158,6 +172,7 @@
     
     [operation setCompletionBlock:^{
         NSLog(@"downloadComplete!");
+        [[YCUtilityManager MBProgressUtility]dismissBusyIndicator:self];
     }];
     [operation start];
 }

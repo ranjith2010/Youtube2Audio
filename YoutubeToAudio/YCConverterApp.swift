@@ -29,7 +29,7 @@ class YCConverterApp: NSObject {
         let sandBoxTableViewController = sandboxTableViewController()
         sandBoxTableViewController.title = "Downloads"
         let navigationControllerForSandBoxTVC = UINavigationController.init(rootViewController: sandBoxTableViewController)
-        let sandBoxTabBarItem = UITabBarItem.init(title: "Downloads", image: (UIImage.init(named: "HomeIcon")), selectedImage:(UIImage.init(named: "HomeIcon")))
+        let sandBoxTabBarItem = UITabBarItem.init(title: "Downloads", image: (UIImage.init(named: "downloadsIcon")), selectedImage:(UIImage.init(named: "downloadsIcon")))
         navigationControllerForSandBoxTVC.tabBarItem = sandBoxTabBarItem
         tabBarController .setViewControllers([navigationController,navigationControllerForSandBoxTVC], animated: true)
         window.rootViewController = tabBarController

@@ -16,6 +16,11 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+//    [[UINavigationBar appearance] setBarTintColor:[UIColor zp_mainColor]];
+    [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
+    [[UINavigationBar appearance] setTitleTextAttributes:
+     [NSDictionary dictionaryWithObjectsAndKeys:[UIColor blackColor], NSForegroundColorAttributeName,[UIFont fontWithName:@"Gill Sans" size:17.0], NSFontAttributeName, nil]];
+    
     YCConverterApp *ycConverterApp = [YCConverterApp new];
     [ycConverterApp startAppWithLaunchOptions:launchOptions application:application window:self.window];
     return YES;

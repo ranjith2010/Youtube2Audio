@@ -15,7 +15,7 @@
 #import "RKNeworkEngine.h"
 
 
-@interface RootTableViewController ()<NSURLConnectionDelegate,UISearchDisplayDelegate,UISearchBarDelegate,UIGestureRecognizerDelegate,YCLongTaskViewProtocol>
+@interface RootTableViewController ()<NSURLConnectionDelegate,UISearchDisplayDelegate,UISearchBarDelegate,UIGestureRecognizerDelegate>
 
 @property (nonatomic,strong) NSMutableArray *dataSource;
 @property (nonatomic) NSMutableData *responseData;
